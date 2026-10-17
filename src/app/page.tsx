@@ -46,7 +46,7 @@ export default async function Home() {
       <section aria-labelledby="hero-h" className="relative overflow-hidden bg-ivory-200">
         <div className="mx-auto grid max-w-[1440px] items-stretch lg:grid-cols-[1.05fr_1fr]">
           <div className="flex flex-col justify-center gap-6 px-4 py-14 sm:px-6 lg:py-24 lg:pr-16">
-            <p className="font-display text-sm font-medium tracking-[0.4em] text-bronze-600" dir="ltr">AUTUMN / WINTER</p>
+            <p className="font-display text-sm font-medium tracking-[0.4em] text-bronze-700" dir="ltr">AUTUMN / WINTER</p>
             <h1 id="hero-h" className="text-4xl font-bold leading-[1.35] sm:text-5xl lg:text-6xl lg:leading-[1.3]">
               دوخت دقیق،<br />حضوری که <span className="text-bronze-600">به یاد می‌ماند</span>
             </h1>
@@ -57,7 +57,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="relative min-h-[420px] lg:min-h-[640px]">
-            <Image src="/media/editorial/hero.webp" alt="مدل مرد با کت‌وشلوار پشمی ذغالی در آتلیه؛ تصویر کمپین نمونه" fill priority sizes="(min-width:1024px) 48vw, 100vw" quality={75} className="object-cover object-top" />
+            <Image src="/media/editorial/hero.webp" alt="مدل مرد با کت‌وشلوار پشمی ذغالی در آتلیه؛ تصویر کمپین نمونه" fill priority fetchPriority="high" sizes="(min-width:1024px) 48vw, 100vw" quality={70} className="object-cover object-top" />
           </div>
         </div>
       </section>
@@ -96,7 +96,7 @@ export default async function Home() {
             <Image src="/media/editorial/campaign-women.webp" alt="مدل زن با کت و شلوار کرم در فضایی گرم؛ تصویر کمپین نمونه" fill sizes="(min-width:768px) 48vw, 100vw" quality={75} className="object-cover" />
           </div>
           <div className="space-y-5 p-8 sm:p-12 lg:p-16">
-            <p className="font-display text-sm tracking-[0.4em] text-bronze-300" dir="ltr">THE EDIT</p>
+            <p className="font-display text-sm tracking-[0.4em] text-bronze-100" dir="ltr">THE EDIT</p>
             <h2 id="ed-h" className="text-3xl font-bold leading-[1.5] sm:text-4xl">سادگی که رسمی می‌ماند</h2>
             <p className="max-w-md leading-9 text-ivory-200">کرپ، پشم و کتان در رنگ‌های خاکی و آرام؛ ست‌هایی که از جلسه صبح تا مهمانی شب با شما همراه‌اند.</p>
             <Button href="/collections/women-suits" variant="accent" size="lg">مشاهده ست‌های زنانه</Button>

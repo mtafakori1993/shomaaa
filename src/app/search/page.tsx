@@ -27,6 +27,7 @@ export default async function SearchPage({ searchParams }: Props) {
       ) : (
         <>
           <p className="mb-6 text-sm text-ink-600" data-testid="result-count">{formatNumber(result.total)} محصول پیدا شد</p>
+          <h2 className="sr-only">فهرست محصولات</h2>
           <ProductGrid products={result.products} />
           <Pagination page={page} totalPages={result.totalPages} hrefFor={(p) => `/search?q=${encodeURIComponent(q)}&page=${p}`} />
         </>

@@ -37,7 +37,7 @@ export function Price({ price, regular, max, size = "md", className }: { price: 
       {onSale && (
         <>
           <span className="sr-only">قیمت قبل از تخفیف</span>
-          <del className="text-[0.85em] text-ink-500">{formatToman(regular)}</del>
+          <del className="text-[0.85em] text-ink-600">{formatToman(regular)}</del>
         </>
       )}
       <span className="font-bold text-ink-900">

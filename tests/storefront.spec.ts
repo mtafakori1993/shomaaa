@@ -10,7 +10,7 @@ const consoleErrors = (page: Page) => {
 test("homepage loads without console errors, with logo and primary nav", async ({ page }) => {
   const errs = consoleErrors(page);
   await page.goto("/");
-  await expect(page.getByRole("link", { name: "شوما — صفحه اصلی" }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /SHOMAAA/ }).first()).toBeVisible();
   await expect(page.locator("h1")).toContainText("دوخت دقیق");
   await expect(page.getByTestId("product-card").first()).toBeVisible();
   expect(errs).toEqual([]);

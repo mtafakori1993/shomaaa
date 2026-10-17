@@ -27,6 +27,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
+    "lighthouse": "^13.5.0",
     "prettier": "^3.9.10",
     "sharp": "^0.35.5",
     "tailwindcss": "^4",

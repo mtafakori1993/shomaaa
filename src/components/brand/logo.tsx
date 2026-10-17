@@ -22,11 +22,11 @@ export function Wordmark({ className }: { className?: string }) {
 
 export function Logo({ className, onDark }: { className?: string; onDark?: boolean }) {
   return (
-    <Link href="/" aria-label="شوما — صفحه اصلی" className={cn("inline-flex items-center gap-2 sm:gap-3", onDark ? "text-ivory-100" : "text-ink-900", className)}>
+    <Link href="/" aria-label="SHOMAAA شوما · پوشاک رسمی — صفحه اصلی" className={cn("inline-flex items-center gap-2 sm:gap-3", onDark ? "text-ivory-100" : "text-ink-900", className)}>
       <LogoMark className="size-8 shrink-0 sm:size-9" />
       <span className="flex flex-col items-start leading-none">
         <Wordmark />
-        <span className="mt-1.5 text-[0.7rem] font-medium tracking-wide text-bronze-500">شوما · پوشاک رسمی</span>
+        <span className="mt-1.5 text-[0.7rem] font-medium tracking-wide text-bronze-700">شوما · پوشاک رسمی</span>
       </span>
     </Link>
   );

@@ -75,7 +75,10 @@ export default async function CollectionPage({ params, searchParams }: Props) {
           {products.length === 0 ? (
             <EmptyState title="محصولی با این فیلترها پیدا نشد" body="فیلترها را کم کنید یا همه محصولات را ببینید." action={<Button href={`/collections/${slug}`} variant="secondary">حذف فیلترها</Button>} />
           ) : (
-            <ProductGrid products={products} priorityCount={4} />
+            <>
+              <h2 className="sr-only">فهرست محصولات</h2>
+              <ProductGrid products={products} priorityCount={4} />
+            </>
           )}
           <Pagination page={page} totalPages={totalPages} hrefFor={href} />
         </div>
