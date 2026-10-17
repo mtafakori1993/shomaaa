@@ -1,0 +1,1 @@
+{"name":"tp-seo-audit-tools","private":true,"type":"commonjs","description":"Offline Yoast analysis (yoastseo library) for the Tafakor Pardazan SEO audit","dependencies":{"yoastseo":"^3.6.0"}}

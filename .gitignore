@@ -26,3 +26,7 @@ wp/languages/
 wp/seed/media/
 wp/seed/products.json
 wp/seed/categories.json
+seo/node_modules
+
+seo/data
+seo/node_modules

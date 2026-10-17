@@ -139,7 +139,7 @@ const CONTENT = {
     h("Project status"),
     p("The store is live at <a href=\"https://shomaaa.ir\" target=\"_blank\" rel=\"noopener\">shomaaa.ir</a> over valid HTTPS and currently runs as a <strong>demo storefront</strong>: products and prices are samples and no real payment gateway is connected yet (orders are recorded without charging anyone). Customer login and order history are not part of this release and are planned."),
     h("Project details"),
-    ul(["Commissioned by: Ms. Yasmin Yamini", "Industry: Fashion and e-commerce", "Target market: Iran · Storefront language: Persian · Design: responsive, right-to-left", "Website: <a href=\"https://shomaaa.ir\" target=\"_blank\" rel=\"noopener\">https://shomaaa.ir</a>", "Designed and developed by Tafakor Pardazan — <a href=\"https://tafakorpardazan.ir/en/\">tafakorpardazan.ir</a>"]),
+    ul(["Commissioned by: Ms. Yasmin Yamini", "Industry: Fashion and e-commerce", "Target market: Iran · Storefront language: Persian · Design: responsive, right-to-left", "Website: <a href=\"https://shomaaa.ir\" target=\"_blank\" rel=\"noopener\">https://shomaaa.ir</a>", "Designed and developed by Tafakor Pardazan — <a href=\"https://tafakorpardazan.ir/en/home/\">tafakorpardazan.ir</a>"]),
     btn("Visit the live store"),
   ].join("\n\n"),
 };

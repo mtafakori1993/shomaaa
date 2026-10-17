@@ -1,0 +1,220 @@
+{
+ "137": {
+  "kw": "سامانه تماس صوتی داخلی سازمان",
+  "title": "سامانه تماس صوتی داخلی سازمان؛ پروژه تی‌پی کال | تفکر پردازان",
+  "desc": "سامانه تماس صوتی داخلی سازمان با شماره داخلی سه‌رقمی روی WebRTC، اپلیکیشن اندروید و داشبورد مدیریتی؛ نمونه کار تی‌پی کال از تفکر پردازان."
+ },
+ "141": {
+  "kw": "نرم‌افزار حسابداری تحت وب",
+  "title": "نرم‌افزار حسابداری تحت وب با تقویم جلالی | پروژه تفکر پردازان",
+  "desc": "نرم‌افزار حسابداری تحت وب با حسابداری دوبل، تقویم جلالی، رابط دوزبانه و گزارش‌های مالی کامل؛ نمونه کار حسابداری تفکر پردازان (TP Accounting)."
+ },
+ "148": {
+  "kw": "اپلیکیشن کنترل دزدگیر سیم‌کارتی",
+  "title": "اپلیکیشن کنترل دزدگیر سیم‌کارتی؛ جی‌اس‌ام آلارم | تفکر پردازان",
+  "desc": "اپلیکیشن کنترل دزدگیر سیم‌کارتی با ارسال دستور پیامکی برای چند دستگاه؛ نسخه اندروید و وب قابل نصب (PWA). نمونه کار جی‌اس‌ام آلارم."
+ },
+ "154": {
+  "kw": "اپلیکیشن درخواست تاکسی آنلاین",
+  "title": "اپلیکیشن درخواست تاکسی آنلاین PWA؛ آژانس | تفکر پردازان",
+  "desc": "اپلیکیشن درخواست تاکسی آنلاین به‌صورت PWA با نقشه تعاملی، مسیریابی، برآورد کرایه و انتخاب نوع وسیله نقلیه؛ نمونه کار آژانس از تفکر پردازان.",
+  "h2_neutral": true
+ },
+ "160": {
+  "kw": "سفارش آنلاین طراحی و چاپ",
+  "title": "اپلیکیشن سفارش آنلاین طراحی و چاپ؛ جوهر | تفکر پردازان",
+  "desc": "سفارش آنلاین طراحی و چاپ با انتخاب قالب، طراحی دلخواه یا بارگذاری فایل و پیگیری سفارش تا تحویل؛ نمونه کار اپلیکیشن جوهر برای یک کسب‌وکار چاپ.",
+  "h2_neutral": true
+ },
+ "164": {
+  "kw": "وب‌سایت مصالح ساختمانی",
+  "title": "وب‌سایت مصالح ساختمانی مهراکو؛ فرانت‌اند و PWA | تفکر پردازان",
+  "desc": "وب‌سایت مصالح ساختمانی با دسته‌بندی محصولات، جست‌وجوی هوشمند و PWA؛ فرانت‌اندی که تفکر پردازان برای مهراکو و آژانس ویرا توسعه داد.",
+  "h2_neutral": true
+ },
+ "166": {
+  "kw": "سوپراپ آژانس",
+  "title": "سوپراپ آژانس؛ اپلیکیشن PWA تاکسی، بازارگاه و کیف پول | تفکر پردازان",
+  "desc": "سوپراپ آژانس یک اپلیکیشن PWA با صفحه اصلی نقشه ذهنی است که تاکسی آنلاین، بازارگاه و کیف پول را با یک حساب واحد کنار هم می‌گذارد."
+ },
+ "168": {
+  "kw": "وب‌سایت خبری اقتصادی",
+  "title": "وب‌سایت خبری اقتصادی با پخش زنده و تابلوی قیمت | تفکر پردازان",
+  "desc": "فرانت‌اند وب‌سایت خبری اقتصادی فارسی با پخش آنلاین ویدیو، نوار اخبار لحظه‌ای و تابلوی قیمت بازارها؛ نمونه کار تفکر پردازان."
+ },
+ "170": {
+  "kw": "وب‌سایت خدمات مهاجرت",
+  "title": "وب‌سایت خدمات مهاجرت به آمریکا؛ ایمبارک | تفکر پردازان",
+  "desc": "طراحی و توسعه وب‌سایت خدمات مهاجرت به آمریکا برای ایمبارک؛ سرویسی که متقاضیان را با وکلای مجاز مهاجرت و قیمت‌گذاری شفاف مرتبط می‌کند."
+ },
+ "213": {
+  "kw": "دستیار هوش مصنوعی",
+  "title": "دستیار هوش مصنوعی برای نرم‌افزار کسب‌وکار؛ کارمند دیجیتال | تفکر پردازان",
+  "desc": "دستیار هوش مصنوعی تفکر پردازان یک کارمند دیجیتال است که درخواست فارسی را در نرم‌افزار حسابداری به کار واقعی تبدیل می‌کند؛ معرفی پروژه."
+ },
+ "220": {
+  "kw": "فروشگاه آنلاین پوشاک رسمی",
+  "title": "فروشگاه آنلاین پوشاک رسمی شوما؛ ووکامرس هدلس | تفکر پردازان",
+  "desc": "فروشگاه آنلاین پوشاک رسمی مردانه و زنانه شوما با Next.js و ووکامرس، رابط فارسی راست‌چین و ۳۰ محصول نمونه؛ سفارش خانم یاسمین یمینی."
+ },
+ "33": {
+  "kw": "",
+  "title": "دستیار صوتی خدمات مشتریان | تفکر پردازان",
+  "desc": "نمونه پروژه دستیار صوتی هوشمند برای خط پاسخگویی یک مجموعه خدماتی؛ محتوای این صفحه نمونه است.",
+  "noindex": true
+ },
+ "34": {
+  "kw": "",
+  "title": "سامانه اتوماسیون فروش | تفکر پردازان",
+  "desc": "نمونه پروژه اتوماسیون فروش و صدور فاکتور برای یک شرکت پخش؛ محتوای این صفحه نمونه است.",
+  "noindex": true
+ },
+ "35": {
+  "kw": "",
+  "title": "تجهیز هوشمند پایش از راه دور | تفکر پردازان",
+  "desc": "نمونه پروژه طراحی سخت‌افزار و نرم‌افزار یک تجهیز صنعتی برای پایش از راه دور؛ محتوای این صفحه نمونه است.",
+  "noindex": true
+ },
+ "176": {
+  "kw": "internal voice calling system",
+  "title": "Internal Voice Calling System over WebRTC: TP Call | Tafakor Pardazan",
+  "desc": "An internal voice calling system for organizations: three-digit extensions over WebRTC, an Android app, a backend service and an admin dashboard."
+ },
+ "178": {
+  "kw": "web-based accounting software",
+  "title": "Web-Based Accounting Software with Jalali Calendar | Tafakor Pardazan",
+  "desc": "Web-based double-entry accounting software with a Persian and English interface, the Jalali calendar and complete financial reports: TP Accounting."
+ },
+ "180": {
+  "kw": "GSM alarm control app",
+  "title": "GSM Alarm Control App for Android and PWA | GSMAlarm",
+  "desc": "A GSM alarm control app that manages several alarm devices and sends commands by SMS, available for Android and as an installable web app (PWA)."
+ },
+ "181": {
+  "kw": "online taxi booking app",
+  "title": "Online Taxi Booking App Built as a PWA: Azhans | Tafakor Pardazan",
+  "desc": "An online taxi booking app built as a PWA, with an interactive map, route calculation and fare estimates: a Tafakor Pardazan project for Azhans.",
+  "h2_neutral": true
+ },
+ "182": {
+  "kw": "online print ordering app",
+  "title": "Online Design and Print Ordering App: Jowhar | Tafakor Pardazan",
+  "desc": "Jowhar is an online print ordering app where customers pick a template, create a design or upload a file and follow the order until delivery.",
+  "h2_neutral": true
+ },
+ "183": {
+  "kw": "building materials website",
+  "title": "Building Materials Website: The Mehraco Frontend | Tafakor Pardazan",
+  "desc": "A building materials website with product categories, smart search and PWA support: the Mehraco frontend we built for the agency Vira.",
+  "h2_neutral": true
+ },
+ "184": {
+  "kw": "taxi booking super app",
+  "title": "Taxi Booking Super App with Marketplace and Wallet | Azhans",
+  "desc": "Azhans Super App is a taxi booking super app, a PWA that brings rides, a marketplace and a wallet together on one mind-map style home screen."
+ },
+ "185": {
+  "kw": "economic news website",
+  "title": "Economic News Website with Live Video and Market Prices",
+  "desc": "The frontend of a Persian economic news website with live video, a breaking-news ticker and a market price board, built by Tafakor Pardazan."
+ },
+ "186": {
+  "kw": "immigration services website",
+  "title": "Immigration Services Website for U.S. Applicants: Immbark",
+  "desc": "Immbark is an immigration services website that connects U.S. applicants with licensed attorneys at transparent prices, built by Tafakor Pardazan."
+ },
+ "214": {
+  "kw": "AI assistant",
+  "title": "AI Assistant for Business Software | Tafakor Pardazan",
+  "desc": "Tafakor Pardazan's AI assistant works as a digital employee: it turns a Persian request into real work inside accounting software."
+ },
+ "230": {
+  "kw": "fashion e-commerce",
+  "title": "Fashion E-commerce Store: SHOMAAA | Tafakor Pardazan",
+  "desc": "SHOMAAA is a fashion e-commerce store for men's and women's formalwear, with a right-to-left Persian interface built on Next.js and WooCommerce."
+ },
+ "55": {
+  "kw": "",
+  "title": "Customer Service Voice Assistant | Tafakor Pardazan",
+  "desc": "A sample project: an AI voice assistant for a service company's answering line. The content of this page is a placeholder.",
+  "noindex": true
+ },
+ "56": {
+  "kw": "",
+  "title": "Sales Automation System | Tafakor Pardazan",
+  "desc": "A sample project: order, invoicing and warehouse automation for a distribution company. The content of this page is a placeholder.",
+  "noindex": true
+ },
+ "57": {
+  "kw": "",
+  "title": "Smart Remote Monitoring Device | Tafakor Pardazan",
+  "desc": "A sample project: hardware and software for an industrial remote monitoring device. The content of this page is a placeholder.",
+  "noindex": true
+ },
+ "31": {
+  "kw": "پلتفرم هوش مصنوعی مکالمه‌ای",
+  "title": "Galatea AI؛ پلتفرم هوش مصنوعی مکالمه‌ای و صوتی | تفکر پردازان",
+  "desc": "Galatea AI پلتفرم هوش مصنوعی مکالمه‌ای و صوتی با درک زبان طبیعی فارسی و اتصال به سامانه‌های سازمانی؛ مغز هوشمند محصولات تفکر پردازان.",
+  "h2_neutral": true
+ },
+ "32": {
+  "kw": "پلتفرم حسابداری و فروش",
+  "title": "Zarix؛ پلتفرم حسابداری و فروش با سخت‌افزار هوشمند | تفکر پردازان",
+  "desc": "Zarix پلتفرم حسابداری و فروش برای کسب‌وکارهای کوچک و متوسط است که نرم‌افزار مالی را با سخت‌افزار هوشمند متصل ترکیب می‌کند."
+ },
+ "172": {
+  "kw": "نرم‌افزار تماس داخلی سازمان",
+  "title": "تی‌پی کال؛ نرم‌افزار تماس داخلی سازمان | محصول تفکر پردازان",
+  "desc": "نرم‌افزار تماس داخلی سازمان با اپلیکیشن اندروید، سرویس بک‌اند و داشبورد مدیریتی؛ همکاران را با شماره داخلی سه‌رقمی روی WebRTC به هم وصل می‌کند."
+ },
+ "173": {
+  "kw": "نرم‌افزار حسابداری دوبل",
+  "title": "نرم‌افزار حسابداری دوبل تحت وب | حسابداری تفکر پردازان",
+  "desc": "نرم‌افزار حسابداری دوبل تحت وب با تقویم جلالی، رابط فارسی و انگلیسی، انبار، خزانه و گزارش‌های مالی؛ محصول حسابداری تفکر پردازان."
+ },
+ "211": {
+  "kw": "دستیار هوش مصنوعی تفکر پردازان",
+  "title": "دستیار هوش مصنوعی تفکر پردازان؛ کارمند دیجیتال در نرم‌افزار",
+  "desc": "معرفی محصول دستیار هوش مصنوعی تفکر پردازان؛ کارمند دیجیتالی که با دستور فارسی، کار حسابداری را در نرم‌افزار انجام می‌دهد."
+ },
+ "53": {
+  "kw": "conversational AI platform",
+  "title": "Galatea AI: A Conversational and Voice AI Platform | Tafakor Pardazan",
+  "desc": "Galatea AI is a conversational AI platform with Persian natural language understanding, conversation management and enterprise integrations.",
+  "h2_neutral": true
+ },
+ "54": {
+  "kw": "accounting and sales platform",
+  "title": "Zarix: An Accounting and Sales Platform with Smart Hardware",
+  "desc": "Zarix is an accounting and sales platform for small and medium businesses that combines financial software with intelligent connected hardware."
+ },
+ "177": {
+  "kw": "internal calling software",
+  "title": "TP Call: Internal Calling Software for Organizations | Tafakor Pardazan",
+  "desc": "Internal calling software for organizations: an Android app, a backend service and an admin dashboard connect colleagues by extension over WebRTC."
+ },
+ "179": {
+  "kw": "double-entry accounting software",
+  "title": "Double-Entry Accounting Software: TP Accounting | Tafakor Pardazan",
+  "desc": "Double-entry accounting software on the web, with Persian and English interfaces, the Jalali calendar, inventory, treasury and financial reports."
+ },
+ "212": {
+  "kw": "Tafakor Pardazan AI assistant",
+  "title": "Tafakor Pardazan AI Assistant: A Digital Employee in Software",
+  "desc": "Meet the Tafakor Pardazan AI assistant, a digital employee that turns a plain Persian request into real accounting work in business software."
+ },
+ "124": {
+  "kw": "پلتفرم بازار خدمات نظافت",
+  "title": "Qlean؛ پلتفرم بازار خدمات نظافت | تفکر پردازان",
+  "desc": "Qlean پلتفرم بازار خدمات نظافت است: مشتری درخواست ثبت می‌کند، متخصصان نظافت پیشنهاد می‌دهند و کار در یک وب‌اپلیکیشن مدیریت می‌شود.",
+  "h2_neutral": true,
+  "no_lead": true
+ },
+ "125": {
+  "kw": "cleaning services marketplace",
+  "title": "Qlean: A Cleaning Services Marketplace | Tafakor Pardazan",
+  "desc": "Qlean is a cleaning services marketplace: customers post a request, cleaning professionals send offers, and the job is managed in one web app.",
+  "h2_neutral": true,
+  "no_lead": true
+ }
+}
