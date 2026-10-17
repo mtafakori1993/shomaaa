@@ -1,0 +1,35 @@
+# Local development backend (WordPress + WooCommerce + MySQL). Not used in production (see deploy/ for k3s).
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: shomaaa
+      MYSQL_USER: shomaaa
+      MYSQL_PASSWORD: ${DEV_DB_PASSWORD:-shomaaa_dev_only}
+      MYSQL_ROOT_PASSWORD: ${DEV_DB_ROOT_PASSWORD:-root_dev_only}
+    volumes: [dbdata:/var/lib/mysql]
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${DEV_DB_ROOT_PASSWORD:-root_dev_only}"]
+      interval: 5s
+      retries: 20
+  wordpress:
+    build: ./wp
+    depends_on:
+      db: { condition: service_healthy }
+    ports: ["127.0.0.1:${WP_PORT:-8089}:80"]
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: shomaaa
+      WORDPRESS_DB_USER: shomaaa
+      WORDPRESS_DB_PASSWORD: ${DEV_DB_PASSWORD:-shomaaa_dev_only}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('DISALLOW_FILE_EDIT', true);
+        define('WP_AUTO_UPDATE_CORE', false);
+      SHOMAAA_STOREFRONT_URL: http://localhost:3000
+      SHOMAAA_DEMO_MODE: "1"
+      SITE_URL: http://localhost:${WP_PORT:-8089}
+      WP_ADMIN_USER: admin
+      WP_ADMIN_PASSWORD: ${DEV_WP_ADMIN_PASSWORD:-admin_dev_only_change}
+      WP_ADMIN_EMAIL: dev@example.test
+    volumes: [uploads:/var/www/html/wp-content/uploads]
+volumes: { dbdata: {}, uploads: {} }

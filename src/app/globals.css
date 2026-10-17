@@ -1,26 +1,165 @@
 @import "tailwindcss";
 
+/*
+ * SHOMAAA design tokens.
+ * Structure follows Adobe Spectrum's discipline (4px spacing grid, tiered text scale, explicit state tokens,
+ * 2px focus ring with offset) — implemented by hand; no Spectrum package is installed.
+ */
+@theme {
+  /* Color: warm ivory / charcoal with restrained bronze + muted olive */
+  --color-ivory-50: #fbf8f2;
+  --color-ivory-100: #f6f1e9;
+  --color-ivory-200: #ece4d6;
+  --color-ivory-300: #ddd2bf;
+  --color-ink-950: #151311;
+  --color-ink-900: #1b1917;
+  --color-ink-800: #292622;
+  --color-ink-700: #3d3934;
+  --color-ink-600: #5b554d;
+  --color-ink-500: #7a7369;
+  --color-bronze-700: #6c5130;
+  --color-bronze-600: #85653c;
+  --color-bronze-500: #a07c4c;
+  --color-bronze-300: #cdb38a;
+  --color-bronze-100: #efe3d0;
+  --color-olive-700: #4a4e39;
+  --color-olive-600: #5e624a;
+  --color-olive-100: #e6e7da;
+  --color-danger-600: #a63a2b;
+  --color-danger-100: #f6e2de;
+  --color-success-600: #3f6b4a;
+  --color-success-100: #e1eee3;
+  --color-warning-600: #8f6414;
+  --color-warning-100: #f6ebcf;
+
+  /* Semantic aliases */
+  --color-surface: var(--color-ivory-100);
+  --color-surface-raised: var(--color-ivory-50);
+  --color-surface-sunken: var(--color-ivory-200);
+  --color-line: var(--color-ivory-300);
+  --color-text: var(--color-ink-900);
+  --color-text-muted: var(--color-ink-600);
+  --color-accent: var(--color-bronze-600);
+
+  /* Type */
+  --font-sans: var(--font-vazir), "Vazirmatn", system-ui, sans-serif;
+  --font-display: var(--font-cormorant), "Times New Roman", serif;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.25rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.75rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.9rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 2rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2.25rem;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.6rem;
+  --text-4xl: 2.5rem;
+  --text-4xl--line-height: 3.2rem;
+  --text-5xl: 3.25rem;
+  --text-5xl--line-height: 4.2rem;
+
+  /* Shape + elevation: small radii, subtle shadows */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --shadow-raised: 0 1px 2px rgb(27 25 23 / 0.06), 0 4px 12px rgb(27 25 23 / 0.06);
+  --shadow-overlay: 0 8px 32px rgb(27 25 23 / 0.18);
+
+  /* Breakpoints (default Tailwind set + wide) */
+  --breakpoint-3xl: 1920px;
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --header-h: 72px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 16px);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-feature-settings: "kern", "liga";
+  text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
+}
+
+/* Focus: 2px ring, 2px offset (Spectrum key-focus pattern) — visible for keyboard only */
+:where(a, button, input, select, textarea, summary, [role="button"], [tabindex]):focus-visible {
+  outline: 2px solid var(--color-ink-900);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+:where([data-on-dark]) :focus-visible {
+  outline-color: var(--color-ivory-100);
+}
+
+::selection {
+  background: var(--color-bronze-300);
+  color: var(--color-ink-950);
+}
+
+/* Latin tokens (SKU, codes, phone numbers) keep LTR order inside RTL text */
+.ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position-x: -200%;
+  }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--color-ivory-200) 25%, var(--color-ivory-100) 37%, var(--color-ivory-200) 63%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes slide-in-start {
+  from {
+    transform: translateX(-100%);
+  }
+}
+@keyframes slide-in-end {
+  from {
+    transform: translateX(100%);
+  }
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
 }

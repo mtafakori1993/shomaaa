@@ -1,0 +1,9 @@
+[
+  {"slug":"men","name":"مردانه","parent":null,"description":"کت‌وشلوار، کت، شلوار و پیراهن رسمی مردانه"},
+  {"slug":"women","name":"زنانه","parent":null,"description":"ست‌های رسمی، بلیزر و پوشاک مجلسی زنانه"},
+  {"slug":"accessories","name":"اکسسوری","parent":null,"description":"کراوات، کمربند، کیف، کفش و شال"},
+  {"slug":"men-suits","name":"کت‌وشلوار مردانه","parent":"men","description":"کت‌وشلوار دوتکه، سه‌تکه، تاکسیدو و دامادی"},
+  {"slug":"men-separates","name":"کت، شلوار و پیراهن مردانه","parent":"men","description":"کت اسپرت، شلوار پارچه‌ای، پیراهن و جلیقه"},
+  {"slug":"women-suits","name":"کت‌وشلوار و ست زنانه","parent":"women","description":"کت‌وشلوار، ست کت‌ودامن و بلیزر زنانه"},
+  {"slug":"women-formal","name":"پوشاک رسمی و مجلسی زنانه","parent":"women","description":"پیراهن مجلسی و لباس رسمی زنانه"}
+]
