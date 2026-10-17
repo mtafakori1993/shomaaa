@@ -47,7 +47,6 @@ function jobs() {
   const list = [];
   for (const p of products) {
     if (ONLY.length && !ONLY.includes(String(p.id)) && !ONLY.includes(p.slug)) continue;
-    const base = p.kind === "flat" ? "Still-life" : "Ghost-mannequin";
     const color1 = p.variantImages ? `, in ${colorEn(p.colors[0].id)} color` : "";
     if (["all", "products"].includes(KIND))
       list.push({ key: `${p.slug}/main`, file: `products/${p.slug}/main`, aspect: "4:5", prompt: `${p.prompt}${color1}. ${STYLE_SUFFIX}.`, model: MODEL, kind: "products" });
@@ -122,7 +121,7 @@ async function main() {
   for (const job of todo) {
     if (spent >= MAX_COST) { console.log(`Stopped: run cost cap $${MAX_COST} reached`); break; }
     try {
-      const { buf, cost, usage } = await generate(job, modalities);
+      const { buf, cost } = await generate(job, modalities);
       const meta = await sharp(buf).metadata();
       if (!["png", "jpeg", "webp"].includes(meta.format)) throw new Error(`unexpected format ${meta.format}`);
       if (!meta.width || meta.width < 512 || !meta.height || meta.height < 512) throw new Error(`image too small ${meta.width}x${meta.height}`);

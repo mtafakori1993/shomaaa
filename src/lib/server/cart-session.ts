@@ -11,10 +11,14 @@ const COOKIE = "shm_cart";
 /** Runs a Store API call bound to the visitor's Cart-Token (kept in an httpOnly cookie) and returns the mapped cart. */
 export async function withCart(path: string, init: StoreFetchInit = {}) {
   const jar = await cookies();
-  const token = jar.get(COOKIE)?.value ?? null;
+  let token = jar.get(COOKIE)?.value ?? null;
+  // Mutations need an existing session: bootstrap a Cart-Token with a read first (Store API demands a nonce otherwise).
+  if (!token && (init.method ?? "GET") !== "GET") token = (await storeFetch<unknown>("/cart")).cartToken;
   const { data, cartToken } = await storeFetch<unknown>(path, { ...init, cartToken: token });
-  if (cartToken && cartToken !== token) {
-    jar.set(COOKIE, cartToken, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production" && process.env.INSECURE_COOKIES !== "1", path: "/", maxAge: 60 * 60 * 24 * 7 });
+  const latest = cartToken ?? token;
+  // Reads never create a session cookie: otherwise concurrent page-load reads would race the first add-to-cart.
+  if ((init.method ?? "GET") !== "GET" && latest && latest !== jar.get(COOKIE)?.value) {
+    jar.set(COOKIE, latest, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production" && process.env.INSECURE_COOKIES !== "1", path: "/", maxAge: 60 * 60 * 24 * 7 });
   }
   return data;
 }

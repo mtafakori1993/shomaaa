@@ -19,13 +19,13 @@ const cols = [
 export function Footer() {
   return (
     <footer className="mt-24 bg-ink-900 text-ivory-200" data-on-dark>
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.3fr_2fr_1.2fr]">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.3fr_2fr_1.2fr] [&>*]:min-w-0">
         <div className="space-y-5">
           <Logo onDark />
           <p className="max-w-sm text-sm leading-7 text-ivory-300">پوشاک رسمی مردانه و زنانه با دوخت دقیق؛ از کت‌وشلوار روزانه تا لباس مجلسی.</p>
           <ul className="space-y-2 text-sm">
             <li className="flex items-center gap-2"><Phone className="size-4 text-bronze-300" aria-hidden /><span>پشتیبانی:</span><a href={`tel:${SITE.phone}`} className="ltr hover:underline">{SITE.phone}</a></li>
-            <li className="flex items-center gap-2"><Mail className="size-4 text-bronze-300" aria-hidden /><a href={`mailto:${SITE.email}`} className="ltr hover:underline">{SITE.email}</a></li>
+            <li className="flex items-center gap-2"><Mail className="size-4 text-bronze-300" aria-hidden /><a href={`mailto:${SITE.email}`} className="ltr break-all hover:underline">{SITE.email}</a></li>
           </ul>
         </div>
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">

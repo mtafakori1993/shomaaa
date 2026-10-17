@@ -87,3 +87,8 @@ add_action('woocommerce_store_api_checkout_order_processed', function ($order) {
         $order->save();
     }
 });
+
+// ---- Images are resized by the storefront (next/image). Never generate or "repair" sub-sizes on read:
+// without this WordPress rewrites attachment metadata on every Store API response.
+add_filter('intermediate_image_sizes_advanced', '__return_empty_array');
+add_filter('wp_get_missing_image_subsizes', '__return_empty_array');

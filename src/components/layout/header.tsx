@@ -22,7 +22,7 @@ export function AnnouncementBar() {
 export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-ivory-100/95 backdrop-blur supports-[backdrop-filter]:bg-ivory-100/85">
-      <div className="mx-auto flex h-[var(--header-h)] max-w-[1440px] items-center gap-2 px-4 sm:px-6 lg:gap-8">
+      <div className="mx-auto flex h-[var(--header-h)] max-w-[1440px] items-center gap-1 px-3 sm:gap-2 sm:px-6 lg:gap-8">
         <MobileMenu />
         <Logo className="ml-auto lg:ml-0" />
         <nav aria-label="منوی اصلی" className="hidden flex-1 lg:block">

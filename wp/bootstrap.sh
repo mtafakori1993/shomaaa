@@ -19,5 +19,6 @@ $WP rewrite structure '/%postname%/' >/dev/null 2>&1 || true
 $WP eval-file /opt/shomaaa/seed/seed-structure.php
 $WP eval-file /opt/shomaaa/seed/seed-products.php
 $WP wc tool run install_pages --user="$WP_ADMIN_USER" >/dev/null 2>&1 || true
+chown -R www-data:www-data /var/www/html/wp-content/uploads 2>/dev/null || true
 $WP cache flush >/dev/null 2>&1 || true
 echo "products (published): $($WP post list --post_type=product --post_status=publish --format=count)"

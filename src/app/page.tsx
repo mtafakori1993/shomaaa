@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/config";
 import { listProducts } from "@/lib/woo/catalog";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: { absolute: `${SITE.name} | کت‌وشلوار و پوشاک رسمی مردانه و زنانه` },
   alternates: { canonical: "/" },
@@ -138,7 +140,7 @@ export default async function Home() {
 
       {/* Newsletter */}
       <section aria-labelledby="nl-h" className="mx-auto mt-24 max-w-[1440px] px-4 sm:px-6">
-        <div className="grid items-center gap-6 rounded-xs bg-ivory-200 p-8 sm:p-12 md:grid-cols-2">
+        <div className="grid grid-cols-1 items-center gap-6 rounded-xs bg-ivory-200 p-6 sm:p-12 md:grid-cols-2 [&>*]:min-w-0">
           <div>
             <h2 id="nl-h" className="text-2xl font-bold">از تازه‌ها زودتر باخبر شوید</h2>
             <p className="mt-2 text-ink-600">ایمیل خود را وارد کنید تا خبر مجموعه‌های جدید و تخفیف‌ها را دریافت کنید.</p>

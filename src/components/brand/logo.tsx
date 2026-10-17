@@ -14,7 +14,7 @@ export function LogoMark({ className, title }: { className?: string; title?: str
 
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <span dir="ltr" className={cn("font-display text-[1.65rem] font-medium leading-none tracking-[0.3em]", className)}>
+    <span dir="ltr" className={cn("font-display text-[1.3rem] font-medium leading-none tracking-[0.26em] sm:text-[1.65rem] sm:tracking-[0.3em]", className)}>
       SHOMAAA
     </span>
   );
@@ -22,8 +22,8 @@ export function Wordmark({ className }: { className?: string }) {
 
 export function Logo({ className, onDark }: { className?: string; onDark?: boolean }) {
   return (
-    <Link href="/" aria-label="شوما — صفحه اصلی" className={cn("inline-flex items-center gap-3", onDark ? "text-ivory-100" : "text-ink-900", className)}>
-      <LogoMark className="size-9 shrink-0" />
+    <Link href="/" aria-label="شوما — صفحه اصلی" className={cn("inline-flex items-center gap-2 sm:gap-3", onDark ? "text-ivory-100" : "text-ink-900", className)}>
+      <LogoMark className="size-8 shrink-0 sm:size-9" />
       <span className="flex flex-col items-start leading-none">
         <Wordmark />
         <span className="mt-1.5 text-[0.7rem] font-medium tracking-wide text-bronze-500">شوما · پوشاک رسمی</span>
