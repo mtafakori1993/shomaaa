@@ -13,9 +13,9 @@ fs.mkdirSync(SHOTS, { recursive: true }); fs.mkdirSync(MOCK, { recursive: true }
 
 const browser = await chromium.launch();
 const settle = async (p) => {
-  await p.waitForLoadState("networkidle");
+  await p.waitForLoadState("networkidle").catch(() => {});
   await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 500) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); } window.scrollTo(0, 0); });
-  await p.waitForLoadState("networkidle");
+  await p.waitForLoadState("networkidle").catch(() => {});
   await p.evaluate(() => document.fonts.ready);
   await p.waitForTimeout(500);
 };
@@ -24,7 +24,7 @@ const desk = await browser.newContext({ viewport: { width: 1440, height: 900 }, 
 const mob = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, locale: "fa-IR" });
 
 const d = await desk.newPage();
-const go = async (p, url) => { await p.goto(BASE + url, { waitUntil: "networkidle" }); await settle(p); };
+const go = async (p, url) => { await p.goto(BASE + url, { waitUntil: "load" }); await settle(p); };
 await go(d, "/"); await d.screenshot({ path: `${SHOTS}/desktop-home.png`, fullPage: true });
 await d.screenshot({ path: `${SHOTS}/desktop-home-fold.png` });
 await go(d, "/collections/men"); await d.screenshot({ path: `${SHOTS}/mens-collection.png` });
