@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: { name: wp-uploads, namespace: shomaaa }
+spec: { accessModes: [ReadWriteOnce], storageClassName: local-path, resources: { requests: { storage: 5Gi } } }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  namespace: shomaaa
+  labels: { app: shomaaa, component: wordpress }
+spec:
+  replicas: 1
+  strategy: { type: Recreate }   # uploads PVC is ReadWriteOnce
+  selector:
+    matchLabels: { app: shomaaa, component: wordpress }
+  template:
+    metadata:
+      labels: { app: shomaaa, component: wordpress }
+    spec:
+      automountServiceAccountToken: false
+      securityContext: { seccompProfile: { type: RuntimeDefault } }
+      containers:
+        - name: wordpress
+          image: shomaaa-local/wp:__WP_TAG__
+          imagePullPolicy: IfNotPresent
+          env:
+            - { name: WORDPRESS_DB_HOST, value: mysql }
+            - { name: WORDPRESS_DB_NAME, value: shomaaa }
+            - { name: WORDPRESS_DB_USER, value: shomaaa }
+            - { name: WORDPRESS_DB_PASSWORD, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: MYSQL_PASSWORD } } }
+            - { name: WORDPRESS_AUTH_KEY, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: WORDPRESS_AUTH_KEY } } }
+            - { name: WORDPRESS_SECURE_AUTH_KEY, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: WORDPRESS_SECURE_AUTH_KEY } } }
+            - { name: WORDPRESS_LOGGED_IN_KEY, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: WORDPRESS_LOGGED_IN_KEY } } }
+            - { name: WORDPRESS_NONCE_KEY, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: WORDPRESS_NONCE_KEY } } }
+            - { name: WORDPRESS_AUTH_SALT, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: WORDPRESS_AUTH_SALT } } }
+            - { name: WORDPRESS_SECURE_AUTH_SALT, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: WORDPRESS_SECURE_AUTH_SALT } } }
+            - { name: WORDPRESS_LOGGED_IN_SALT, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: WORDPRESS_LOGGED_IN_SALT } } }
+            - { name: WORDPRESS_NONCE_SALT, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: WORDPRESS_NONCE_SALT } } }
+            - { name: WORDPRESS_CONFIG_EXTRA, value: "define('DISALLOW_FILE_EDIT', true); define('WP_AUTO_UPDATE_CORE', false); define('AUTOMATIC_UPDATER_DISABLED', true);" }
+            - { name: SHOMAAA_STOREFRONT_URL, value: "https://shomaaa.ir" }
+            - { name: SHOMAAA_DEMO_MODE, value: "1" }
+            - { name: SITE_URL, value: "https://shomaaa.ir" }
+            - { name: WP_ADMIN_USER, value: shomaaa_admin }
+            - { name: WP_ADMIN_PASSWORD, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: WP_ADMIN_PASSWORD } } }
+            - { name: WP_ADMIN_EMAIL, value: info@tafakorpardazan.ir }
+          ports: [{ name: http, containerPort: 80 }]
+          startupProbe: { httpGet: { path: /healthz-live.txt, port: 80 }, periodSeconds: 5, failureThreshold: 36 }
+          readinessProbe: { httpGet: { path: /wp-json/shomaaa/v1/health, port: 80 }, periodSeconds: 10, timeoutSeconds: 5 }
+          livenessProbe: { httpGet: { path: /healthz-live.txt, port: 80 }, periodSeconds: 20, timeoutSeconds: 5 }
+          resources: { requests: { cpu: 100m, memory: 256Mi }, limits: { cpu: "1", memory: 768Mi } }
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: { drop: [ALL], add: [CHOWN, DAC_OVERRIDE, FOWNER, SETGID, SETUID, NET_BIND_SERVICE] }
+          volumeMounts: [{ name: uploads, mountPath: /var/www/html/wp-content/uploads }]
+      volumes: [{ name: uploads, persistentVolumeClaim: { claimName: wp-uploads } }]
+---
+apiVersion: v1
+kind: Service
+metadata: { name: wordpress, namespace: shomaaa }
+spec:
+  selector: { app: shomaaa, component: wordpress }
+  ports: [{ name: http, port: 80, targetPort: 80 }]

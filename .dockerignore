@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+generated
+assets-src
+test-results
+playwright-report
+artifacts
+wp/vendor
+wp/languages
+.env*
+docker-compose.yml

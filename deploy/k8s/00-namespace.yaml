@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: shomaaa
+  labels: { app: shomaaa }
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: security-headers
+  namespace: shomaaa
+spec:
+  headers:
+    contentTypeNosniff: true
+    customFrameOptionsValue: SAMEORIGIN
+    frameDeny: false
+    referrerPolicy: strict-origin-when-cross-origin
+    stsSeconds: 31536000
+    stsIncludeSubdomains: false

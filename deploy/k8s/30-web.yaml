@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: { name: web-data, namespace: shomaaa }
+spec: { accessModes: [ReadWriteOnce], storageClassName: local-path, resources: { requests: { storage: 1Gi } } }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: shomaaa
+  labels: { app: shomaaa, component: web, tier: frontend }
+spec:
+  replicas: 1   # newsletter file + in-process rate limiter assume a single replica; raise after moving them to shared storage
+  strategy: { type: Recreate }
+  selector:
+    matchLabels: { app: shomaaa, component: web }
+  template:
+    metadata:
+      labels: { app: shomaaa, component: web, tier: frontend }
+    spec:
+      automountServiceAccountToken: false
+      securityContext: { runAsNonRoot: true, runAsUser: 1000, runAsGroup: 1000, fsGroup: 1000, seccompProfile: { type: RuntimeDefault } }
+      containers:
+        - name: web
+          image: shomaaa-local/web:__WEB_TAG__
+          imagePullPolicy: IfNotPresent
+          env:
+            - { name: WORDPRESS_URL, value: "http://wordpress:80" }
+            - { name: NEXT_PUBLIC_SITE_URL, value: "https://shomaaa.ir" }
+            - { name: NEWSLETTER_DIR, value: /data }
+            - { name: REVALIDATE_SECRET, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: REVALIDATE_SECRET } } }
+          ports: [{ name: http, containerPort: 3000 }]
+          startupProbe: { httpGet: { path: /api/health, port: 3000 }, periodSeconds: 3, failureThreshold: 30 }
+          readinessProbe: { httpGet: { path: /api/health, port: 3000 }, periodSeconds: 10, timeoutSeconds: 3 }
+          livenessProbe: { httpGet: { path: /api/health, port: 3000 }, periodSeconds: 20, timeoutSeconds: 3 }
+          resources: { requests: { cpu: 100m, memory: 192Mi }, limits: { cpu: "1", memory: 512Mi } }
+          securityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: [ALL] } }
+          volumeMounts:
+            - { name: data, mountPath: /data }
+            - { name: nextcache, mountPath: /app/.next/cache }
+            - { name: tmp, mountPath: /tmp }
+      volumes:
+        - { name: data, persistentVolumeClaim: { claimName: web-data } }
+        - { name: nextcache, emptyDir: { sizeLimit: 512Mi } }
+        - { name: tmp, emptyDir: { sizeLimit: 128Mi } }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: web, namespace: shomaaa }
+spec:
+  selector: { app: shomaaa, component: web }
+  ports: [{ name: http, port: 80, targetPort: 3000 }]

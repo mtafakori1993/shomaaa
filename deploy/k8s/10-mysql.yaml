@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: shomaaa
+  labels: { app: shomaaa, component: mysql }
+spec:
+  serviceName: mysql
+  replicas: 1
+  persistentVolumeClaimRetentionPolicy: { whenDeleted: Retain, whenScaled: Retain }
+  selector:
+    matchLabels: { app: shomaaa, component: mysql }
+  template:
+    metadata:
+      labels: { app: shomaaa, component: mysql }
+    spec:
+      automountServiceAccountToken: false
+      securityContext: { runAsNonRoot: true, runAsUser: 999, runAsGroup: 999, fsGroup: 999, seccompProfile: { type: RuntimeDefault } }
+      containers:
+        - name: mysql
+          image: mysql:8.4@sha256:6ea90827b1100f8f2ae306a539f86d2c264a26ed435a2a9f75551dd5c3aeb242
+          imagePullPolicy: IfNotPresent
+          env:
+            - { name: MYSQL_DATABASE, value: shomaaa }
+            - { name: MYSQL_USER, value: shomaaa }
+            - { name: MYSQL_ROOT_PASSWORD, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: MYSQL_ROOT_PASSWORD } } }
+            - { name: MYSQL_PASSWORD, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: MYSQL_PASSWORD } } }
+          ports: [{ name: mysql, containerPort: 3306 }]
+          startupProbe: { exec: { command: [sh, -c, 'mysqladmin ping -h 127.0.0.1 -uroot -p"$MYSQL_ROOT_PASSWORD" --silent'] }, periodSeconds: 5, failureThreshold: 60 }
+          readinessProbe: { exec: { command: [sh, -c, 'mysqladmin ping -h 127.0.0.1 -uroot -p"$MYSQL_ROOT_PASSWORD" --silent'] }, periodSeconds: 10, timeoutSeconds: 5 }
+          livenessProbe: { exec: { command: [sh, -c, 'mysqladmin ping -h 127.0.0.1 -uroot -p"$MYSQL_ROOT_PASSWORD" --silent'] }, periodSeconds: 20, timeoutSeconds: 5, failureThreshold: 6 }
+          resources: { requests: { cpu: 100m, memory: 384Mi }, limits: { cpu: "1", memory: 1Gi } }
+          securityContext: { allowPrivilegeEscalation: false, capabilities: { drop: [ALL] } }
+          volumeMounts: [{ name: data, mountPath: /var/lib/mysql }]
+  volumeClaimTemplates:
+    - metadata: { name: data }
+      spec: { accessModes: [ReadWriteOnce], storageClassName: local-path, resources: { requests: { storage: 5Gi } } }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: mysql, namespace: shomaaa }
+spec:
+  clusterIP: None
+  selector: { app: shomaaa, component: mysql }
+  ports: [{ name: mysql, port: 3306 }]
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: { name: db-backups, namespace: shomaaa }
+spec: { accessModes: [ReadWriteOnce], storageClassName: local-path, resources: { requests: { storage: 2Gi } } }
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata: { name: mysql-backup, namespace: shomaaa, labels: { app: shomaaa, component: backup } }
+spec:
+  schedule: "20 3 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels: { app: shomaaa, role: job }
+        spec:
+          restartPolicy: OnFailure
+          automountServiceAccountToken: false
+          containers:
+            - name: backup
+              image: mysql:8.4@sha256:6ea90827b1100f8f2ae306a539f86d2c264a26ed435a2a9f75551dd5c3aeb242
+              imagePullPolicy: IfNotPresent
+              env: [{ name: MYSQL_PWD, valueFrom: { secretKeyRef: { name: shomaaa-secrets, key: MYSQL_ROOT_PASSWORD } } }]
+              command: [sh, -c]
+              args:
+                - |
+                  set -e
+                  f=/backup/db_$(date +%Y%m%d_%H%M%S).sql.gz
+                  mysqldump -h mysql -uroot --single-transaction --routines --triggers shomaaa | gzip > "$f"
+                  ls -1t /backup/db_*.sql.gz | tail -n +15 | xargs -r rm --
+              volumeMounts: [{ name: backups, mountPath: /backup }]
+              resources: { requests: { cpu: 10m, memory: 64Mi }, limits: { cpu: 500m, memory: 256Mi } }
+          volumes: [{ name: backups, persistentVolumeClaim: { claimName: db-backups } }]

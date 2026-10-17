@@ -1,0 +1,79 @@
+# TLS: Traefik ACME (HTTP-01) resolver "le", same as the other namespaces on this node.
+# Requires the public DNS A record for shomaaa.ir / www.shomaaa.ir to point at 193.151.152.230 (not through a CDN proxy).
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: shomaaa
+  namespace: shomaaa
+  labels: { app: shomaaa }
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: shomaaa-security-headers@kubernetescrd
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.tls.certresolver: le
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: shomaaa.ir
+      http: { paths: [{ path: /, pathType: Prefix, backend: { service: { name: web, port: { number: 80 } } } }] }
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: shomaaa-www
+  namespace: shomaaa
+  labels: { app: shomaaa }
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: shomaaa-redirect-www@kubernetescrd
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.tls.certresolver: le
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: www.shomaaa.ir
+      http: { paths: [{ path: /, pathType: Prefix, backend: { service: { name: web, port: { number: 80 } } } }] }
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata: { name: redirect-www, namespace: shomaaa }
+spec:
+  redirectRegex: { regex: "^https://www\\.shomaaa\\.ir/(.*)", replacement: "https://shomaaa.ir/${1}", permanent: true }
+---
+# Default deny, then allow only the required flows.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: { name: default-deny-ingress, namespace: shomaaa }
+spec: { podSelector: {}, policyTypes: [Ingress] }
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: { name: allow-traefik-to-web, namespace: shomaaa }
+spec:
+  podSelector: { matchLabels: { app: shomaaa, component: web } }
+  policyTypes: [Ingress]
+  ingress:
+    - from: [{ namespaceSelector: { matchLabels: { kubernetes.io/metadata.name: kube-system } } }]
+      ports: [{ port: 3000, protocol: TCP }]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: { name: allow-web-to-wordpress, namespace: shomaaa }
+spec:
+  podSelector: { matchLabels: { app: shomaaa, component: wordpress } }
+  policyTypes: [Ingress]
+  ingress:
+    - from: [{ podSelector: { matchLabels: { app: shomaaa, component: web } } }]
+      ports: [{ port: 80, protocol: TCP }]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: { name: allow-wordpress-and-jobs-to-mysql, namespace: shomaaa }
+spec:
+  podSelector: { matchLabels: { app: shomaaa, component: mysql } }
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - podSelector: { matchLabels: { app: shomaaa, component: wordpress } }
+        - podSelector: { matchLabels: { app: shomaaa, role: job } }
+      ports: [{ port: 3306, protocol: TCP }]
