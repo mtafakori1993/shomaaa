@@ -63,10 +63,12 @@ export function mapDetail(p: Raw, variations: Variation[]): ProductDetail {
   };
 }
 
-export function mapVariation(v: Raw, refs: Raw[]): Variation {
+/** The Store API names variation attributes by their label (e.g. "سایز"); map them back to the taxonomy (pa_size). */
+export function mapVariation(v: Raw, refs: Raw[], attrDefs: Raw[]): Variation {
   const ref = refs.find((r) => r.id === v.id);
+  const taxByLabel = new Map<string, string>(attrDefs.filter((a) => a.taxonomy).map((a) => [a.name, a.taxonomy]));
   const attributes: Record<string, string> = {};
-  for (const a of ref?.attributes ?? []) attributes[a.name] = a.value;
+  for (const a of ref?.attributes ?? []) attributes[taxByLabel.get(a.name) ?? a.name] = a.value;
   const pr = v.prices ?? {};
   return {
     id: v.id,

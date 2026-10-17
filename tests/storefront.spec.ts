@@ -60,6 +60,28 @@ test("variable product requires a size before add to cart", async ({ page }) => 
   await expect(page.getByTestId("variation-error")).toContainText("سایز");
 });
 
+test("selecting a size enables add to cart for a variable product and adds the right variation", async ({ page }) => {
+  await page.goto("/products/aria-charcoal-wool-suit");
+  const sizes = page.getByRole("radio");
+  await expect(sizes.first()).toBeEnabled();
+  await sizes.first().click();
+  await expect(sizes.first()).toHaveAttribute("aria-checked", "true");
+  await expect(page.getByTestId("product-price")).toContainText("۱۶٬۸۰۰٬۰۰۰");
+  await page.getByTestId("add-to-cart").click();
+  await expect(page.getByTestId("cart-drawer")).toBeVisible();
+  await expect(page.getByTestId("cart-line")).toHaveCount(1);
+  await expect(page.getByTestId("cart-line")).toContainText("سایز");
+});
+
+test("colour variants swap the gallery image and price stays consistent", async ({ page }) => {
+  await page.goto("/products/silk-scarf-arabesque");
+  const before = await page.locator('[data-testid="gallery"] img').first().getAttribute("src");
+  await page.getByRole("radio", { name: /شامپاینی/ }).click();
+  await expect(page.locator('[data-testid="gallery"] img').last()).toBeVisible();
+  const after = await page.getByTestId("gallery").locator("img[alt]:not([alt=''])").first().getAttribute("src");
+  expect(after).not.toBe(before);
+});
+
 test("add to cart, change quantity, remove, totals stay correct", async ({ page }) => {
   await page.goto("/products/silk-bow-tie-black"); // simple product, 740,000 toman
   await page.getByTestId("add-to-cart").click();

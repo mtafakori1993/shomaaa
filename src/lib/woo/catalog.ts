@@ -57,7 +57,7 @@ export const getProduct = cache(async (slug: string): Promise<ProductDetail | nu
     let variations: ReturnType<typeof mapVariation>[] = [];
     if (raw.type === "variable") {
       const { data: vs } = await storeFetch<any[]>(`/products?parent=${raw.id}&type=variation&per_page=100`, { revalidate: REVALIDATE, tags: TAGS });
-      variations = vs.map((v) => mapVariation(v, raw.variations ?? []));
+      variations = vs.map((v) => mapVariation(v, raw.variations ?? [], raw.attributes ?? []));
     }
     return mapDetail(raw, variations);
   } catch (e) {
